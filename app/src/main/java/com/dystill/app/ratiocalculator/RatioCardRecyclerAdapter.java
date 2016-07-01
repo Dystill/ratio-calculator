@@ -50,6 +50,12 @@ public class RatioCardRecyclerAdapter extends
         return ratioList.size();
     }
 
+    public void removeAt(int position) {
+        MainActivity.removeRatio(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, ratioList.size());
+    }
+
     protected class RatioCardHolder extends RecyclerView.ViewHolder {
 
         EditText topLeft, topRight, bottomLeft, bottomRight;

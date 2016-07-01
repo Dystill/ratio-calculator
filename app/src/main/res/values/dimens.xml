@@ -3,15 +3,22 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="activity_vertical_margin_top">16dp</dimen>
-    <dimen name="activity_vertical_margin_bottom">8dp</dimen>
+    <dimen name="activity_margin_bottom">8dp</dimen>
+    <dimen name="activity_margin_top">16dp</dimen>
 
-    <dimen name="card_horizontal_margin">0dp</dimen>
-    <dimen name="card_vertical_margin_top">0dp</dimen>
-    <dimen name="card_vertical_margin_bottom">8dp</dimen>
-    <dimen name="card_padding">24dp</dimen>
-    <dimen name="card_top_padding">24dp</dimen>
+    <dimen name="card_margin_bottom">8dp</dimen>
 
-    <dimen name="card_title_bottom_margin">16dp</dimen>
+    <dimen name="card_table_horizontal_margin">24dp</dimen>
+    <dimen name="card_table_margin_bottom">16dp</dimen>
+    <dimen name="card_table_margin_top">8dp</dimen>
+
+    <dimen name="card_title_horizontal_margin">24dp</dimen>
+    <dimen name="card_title_margin_bottom">16dp</dimen>
+    <dimen name="card_title_margin_top">24dp</dimen>
+
+    <dimen name="card_buttonarea_margin_bottom">8dp</dimen>
+    <dimen name="card_buttonarea_margin_top">8dp</dimen>
+    <dimen name="card_buttonarea_horizontal_margin">8dp</dimen>
+    <dimen name="card_button_horizontal_margin">8dp</dimen>
 
 </resources>

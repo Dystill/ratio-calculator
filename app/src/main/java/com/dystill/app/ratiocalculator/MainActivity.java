@@ -35,4 +35,8 @@ public class MainActivity extends AppCompatActivity {
         mainRatioList.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    protected static void removeRatio(int folder) {
+        RATIO_LIST.remove(folder);
+    }
+
 }

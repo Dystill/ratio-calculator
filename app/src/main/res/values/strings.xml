@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Ratio Calculator</string>
-    <string name="card_hint_text">New Ratio</string>
+    <string name="card_title_hint">New Ratio</string>
+    <string name="card_delete_button">Delete</string>
 </resources>
