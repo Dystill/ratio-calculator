@@ -2,4 +2,6 @@
     <string name="app_name">Ratio Calculator</string>
     <string name="card_title_hint">New Ratio</string>
     <string name="card_delete_button">Delete</string>
+    <string name="action_add">Add New Ratio</string>
+    <string name="action_settings">Settings</string>
 </resources>
