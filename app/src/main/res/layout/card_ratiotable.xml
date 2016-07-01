@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/card_vertical_margin_bottom"
+    android:layout_marginLeft="@dimen/card_horizontal_margin"
+    android:layout_marginRight="@dimen/card_horizontal_margin"
+    android:layout_marginTop="@dimen/card_vertical_margin_top"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardUseCompatPadding="true" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/card_padding"
+        android:paddingTop="@dimen/card_top_padding"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/CardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_title_bottom_margin"
+            android:hint="@string/card_hint_text"
+            android:background="@android:color/transparent"
+            android:textStyle="bold|italic"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent" />
+
+        <TableLayout
+            android:id="@+id/TableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="3"
+            android:columnCount="3"
+            android:stretchColumns="*"
+            android:layout_below="@+id/CardTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:focusableInTouchMode="false">
+
+            <TableRow
+                android:id="@+id/TableRowLayout_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <EditText
+                    android:id="@+id/numberTopLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="5"
+                    android:layout_column="0"
+                    android:maxLines="1"
+                    android:selectAllOnFocus="true" />
+
+                <EditText
+                    android:id="@+id/numberTopRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="5"
+                    android:layout_column="2"
+                    android:maxLines="1"
+                    android:selectAllOnFocus="true" />
+
+            </TableRow>
+
+
+            <TableRow
+                android:id="@+id/TableRowLayout_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorAccent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_column="0" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="="
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_column="1"
+                    android:textAlignment="center" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorAccent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_column="2" />
+
+            </TableRow>
+
+
+            <TableRow
+                android:id="@+id/TableRowLayout_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <EditText
+                    android:id="@+id/numberBottomLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_column="0"
+                    android:maxLines="1"
+                    android:selectAllOnFocus="true" />
+
+                <EditText
+                    android:id="@+id/numberBottomRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_column="2"
+                    android:maxLines="1"
+                    android:selectAllOnFocus="true" />
+
+            </TableRow>
+
+        </TableLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

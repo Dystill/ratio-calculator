@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ratio Calculator</string>
+    <string name="card_hint_text">New Ratio</string>
 </resources>
