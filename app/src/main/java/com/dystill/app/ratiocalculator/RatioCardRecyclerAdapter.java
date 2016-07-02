@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class RatioCardRecyclerAdapter extends
@@ -18,6 +19,7 @@ public class RatioCardRecyclerAdapter extends
 
     private final LayoutInflater inflater;
     private final List<double[]> ratioList;
+    DecimalFormat decimalFormat = new DecimalFormat("#.####");
 
     public RatioCardRecyclerAdapter(Context context, List<double[]> rList) {
         this.inflater = LayoutInflater.from(context);
@@ -36,10 +38,10 @@ public class RatioCardRecyclerAdapter extends
         Log.v("onBindViewHolder", "Started");
 
         Log.v("onBindViewHolder", "Create Text");
-        String textA = "" + ratioList.get(position)[0];
-        String textB = "" + ratioList.get(position)[1];
-        String textC = "" + ratioList.get(position)[2];
-        String textD = "" + ratioList.get(position)[3];
+        String textA = decimalFormat.format(ratioList.get(position)[0]);
+        String textB = decimalFormat.format(ratioList.get(position)[1]);
+        String textC = decimalFormat.format(ratioList.get(position)[2]);
+        String textD = decimalFormat.format(ratioList.get(position)[3]);
 
         Log.v("onBindViewHolder", "Set Text");
         if(!(holder.topLeft.hasFocus() || holder.bottomLeft.hasFocus() ||
@@ -92,14 +94,23 @@ public class RatioCardRecyclerAdapter extends
                 @Override
                 public void afterTextChanged(Editable editable) {
                     int position = getAdapterPosition();
-                    Log.v("afterTextChanged", "topLeft" + position);
-                    ratioList.get(position)[0] = Double.parseDouble(editable.toString());
-                    ratioList.get(position)[2] = solveRatioForTop(ratioList.get(position)[0],
+                    Log.v("afterTextChanged", "Changing A" + position);
+
+                    try {
+                        ratioList.get(position)[0] = Double.parseDouble(editable.toString());
+                    } catch(Exception e) {
+                        ratioList.get(position)[0] = 0.0;
+                    }
+
+                    if(ratioList.get(position)[1] != 0)
+                        ratioList.get(position)[2] = solveRatioForTop(ratioList.get(position)[0],
                             ratioList.get(position)[1], ratioList.get(position)[3]);
+
+                    Log.v("afterTextChanged", "A = " + ratioList.get(position)[0]);
                     Log.v("afterTextChanged", "C = " + ratioList.get(position)[2]);
-                    String textC = "" + ratioList.get(position)[2];
                     if(topLeft.hasFocus()) {
-                        topRight.setText(textC);
+                        Log.v("afterTextChanged", "has focus");
+                        topRight.setText(decimalFormat.format(ratioList.get(position)[2]));
                     }
                 }
             });
@@ -115,13 +126,23 @@ public class RatioCardRecyclerAdapter extends
                 @Override
                 public void afterTextChanged(Editable editable) {
                     int position = getAdapterPosition();
-                    Log.v("afterTextChanged", "bottomLeft" + position);
-                    ratioList.get(position)[1] = Double.parseDouble(editable.toString());
-                    ratioList.get(position)[3] = solveRatioForBottom(ratioList.get(position)[0],
+                    Log.v("afterTextChanged", "Changing B" + position);
+
+                    try {
+                        ratioList.get(position)[1] = Double.parseDouble(editable.toString());
+                    } catch(Exception e) {
+                        ratioList.get(position)[0] = 0.0;
+                    }
+
+                    if(ratioList.get(position)[0] != 0)
+                        ratioList.get(position)[3] = solveRatioForBottom(ratioList.get(position)[0],
                             ratioList.get(position)[1], ratioList.get(position)[2]);
-                    String textD = "" + ratioList.get(position)[3];
+
+                    Log.v("afterTextChanged", "B = " + ratioList.get(position)[1]);
+                    Log.v("afterTextChanged", "D = " + ratioList.get(position)[3]);
                     if(bottomLeft.hasFocus()) {
-                        bottomRight.setText(textD);
+                        Log.v("afterTextChanged", "has focus");
+                        bottomRight.setText(decimalFormat.format(ratioList.get(position)[3]));
                     }
                 }
             });
@@ -137,13 +158,22 @@ public class RatioCardRecyclerAdapter extends
                 @Override
                 public void afterTextChanged(Editable editable) {
                     int position = getAdapterPosition();
-                    Log.v("afterTextChanged", "topRight" + position);
-                    ratioList.get(position)[2] = Double.parseDouble(editable.toString());
-                    ratioList.get(position)[3] = solveRatioForBottom(ratioList.get(position)[0],
+                    Log.v("afterTextChanged", "Changing C" + position);
+
+                    try {
+                        ratioList.get(position)[2] = Double.parseDouble(editable.toString());
+                    } catch(Exception e) {
+                        ratioList.get(position)[0] = 0.0;
+                    }
+
+                    if(ratioList.get(position)[0] != 0)
+                        ratioList.get(position)[3] = solveRatioForBottom(ratioList.get(position)[0],
                             ratioList.get(position)[1], ratioList.get(position)[2]);
-                    String textD = "" + ratioList.get(position)[3];
+                    Log.v("afterTextChanged", "C = " + ratioList.get(position)[2]);
+                    Log.v("afterTextChanged", "D = " + ratioList.get(position)[3]);
                     if(topRight.hasFocus()) {
-                        bottomRight.setText(textD);
+                        Log.v("afterTextChanged", "has focus");
+                        bottomRight.setText(decimalFormat.format(ratioList.get(position)[3]));
                     }
                 }
             });
@@ -159,13 +189,22 @@ public class RatioCardRecyclerAdapter extends
                 @Override
                 public void afterTextChanged(Editable editable) {
                     int position = getAdapterPosition();
-                    Log.v("afterTextChanged", "bottomRight" + position);
-                    ratioList.get(position)[3] = Double.parseDouble(editable.toString());
-                    ratioList.get(position)[2] = solveRatioForTop(ratioList.get(position)[0],
+                    Log.v("afterTextChanged", "Changing D" + position);
+
+                    try {
+                        ratioList.get(position)[3] = Double.parseDouble(editable.toString());
+                    } catch(Exception e) {
+                        ratioList.get(position)[0] = 0.0;
+                    }
+
+                    if(ratioList.get(position)[1] != 0)
+                        ratioList.get(position)[2] = solveRatioForTop(ratioList.get(position)[0],
                             ratioList.get(position)[1], ratioList.get(position)[3]);
-                    String textD = "" + ratioList.get(position)[2];
+                    Log.v("afterTextChanged", "D = " + ratioList.get(position)[3]);
+                    Log.v("afterTextChanged", "C = " + ratioList.get(position)[2]);
                     if(bottomRight.hasFocus()) {
-                        topRight.setText(textD);
+                        Log.v("afterTextChanged", "has focus");
+                        bottomRight.setText(decimalFormat.format(ratioList.get(position)[2]));
                     }
                 }
             });
@@ -173,18 +212,16 @@ public class RatioCardRecyclerAdapter extends
 
         // A:B::C:D
         private double solveRatioForTop(double knownTop, double knownBottom, double unknownBottom) {
-            if(knownBottom != 0)
-                return (knownTop * unknownBottom) / knownBottom;
-            else
-                return knownTop;
+            Log.v("solveRatioForTop", "Solving Ratio for Top value");
+            Log.v("solveRatioForTop", "Result: " + (knownTop * unknownBottom) / knownBottom);
+            return (knownTop * unknownBottom) / knownBottom;
         }
 
         // A:B::C:D
         private double solveRatioForBottom(double knownTop, double knownBottom, double unknownTop) {
-            if(knownTop != 0)
-                return (knownBottom * unknownTop) / knownTop;
-            else
-                return knownBottom;
+            Log.v("solveRatioForBottom", "Solving Ratio for Bottom value");
+            Log.v("solveRatioForBottom", "Result: " + (knownBottom * unknownTop) / knownTop);
+            return (knownBottom * unknownTop) / knownTop;
         }
 
     }

@@ -1,5 +1,6 @@
 package com.dystill.app.ratiocalculator;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
         background = (LinearLayout) findViewById(R.id.backgroundLayout);
         RecyclerView mainRatioList = (RecyclerView) findViewById(R.id.cardList);
 
-        RATIO_LIST = new ArrayList<>();
+        // initialize everything
+        RATIO_LIST = new ArrayList<>();     // array
+        loadSharedPreferences();            // get shared preferences
+        checkRatioImageVisibilityStatus();  // background
 
         // add cards to the recyclerView
         mainRatioListAdapter = new RatioCardRecyclerAdapter(this, RATIO_LIST);
@@ -45,6 +49,29 @@ public class MainActivity extends AppCompatActivity {
                 addRatio();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {                                                                    ////// onDestroy() //////
+        super.onDestroy();
+        Log.v("onDestroy", "Started");
+        SharedPreferences settings = getSharedPreferences("preferences", 0);                        // load the preference file
+        SharedPreferences.Editor editor = settings.edit();                                          // create an editor to add data
+        editor.clear();                                                                             // clear previous data
+
+        for (int c = 0; c < RATIO_LIST.size(); c++) {
+            Log.v("onCreate", "Adding data for card " + c);
+
+            for (int i = 0; i < 4; i++) {
+                if(Double.isNaN(RATIO_LIST.get(c)[i]))
+                    editor.putString("ratio"+c+"num"+i, "0.0");
+                else
+                    editor.putString("ratio"+c+"num"+i,
+                        Double.toString(RATIO_LIST.get(c)[i]));
+            }
+        }
+        RATIO_LIST.clear();
+        editor.apply();                                                                             // Commit the Edits!
     }
 
     @Override
@@ -66,6 +93,24 @@ public class MainActivity extends AppCompatActivity {
 
             default:                                                                                // the user's action was not recognized.
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // load data from the shared preferences file
+    private void loadSharedPreferences() {
+        Log.v("onCreate", "Preferences");
+        SharedPreferences settings = getSharedPreferences("preferences", 0);                        // find the preferences file
+
+        double temp_array[];
+        for (int c = 0; settings.contains("ratio"+c+"num0"); c++) {
+            Log.v("onCreate", "Adding data for card " + c);
+
+            temp_array = new double[4];
+            for (int i = 0; i < 4; i++) {
+                temp_array[i] = Double.parseDouble(settings.getString("ratio"+c+"num"+i,"0.0"));
+            }
+
+            RATIO_LIST.add(temp_array);
         }
     }
 
