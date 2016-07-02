@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.List;
@@ -35,35 +36,27 @@ public class RatioCardRecyclerAdapter extends
     public void onBindViewHolder(RatioCardHolder holder, final int position) {
         Log.v("onBindViewHolder", "Started");
 
-        /*
         Log.v("onBindViewHolder", "Create Text");
         String textA = "" + ratioList.get(position)[0];
         String textB = "" + ratioList.get(position)[1];
         String textC = "" + ratioList.get(position)[2];
         String textD = "" + ratioList.get(position)[3];
 
-        switch (changeFlag) {
-            case 'A':
-                holder.topLeft.setText(textA);
-                break;
-            case 'B':
-                holder.bottomLeft.setText(textB);
-                break;
-            case 'C':
-                holder.topRight.setText(textC);
-                break;
-            case 'D':
-                holder.bottomRight.setText(textD);
-                break;
-            default:
-                // set the text fo each text field
-                Log.v("onBindViewHolder", "Set Text");
-                holder.topLeft.setText(textA);
-                holder.bottomLeft.setText(textB);
-                holder.topRight.setText(textC);
-                holder.bottomRight.setText(textD);
+        Log.v("onBindViewHolder", "Set Text");
+        if(!(holder.topLeft.hasFocus() || holder.bottomLeft.hasFocus() ||
+                holder.topRight.hasFocus() || holder.bottomRight.hasFocus())) {
+            holder.topLeft.setText(textA);
+            holder.bottomLeft.setText(textB);
+            holder.topRight.setText(textC);
+            holder.bottomRight.setText(textD);
         }
-        /**/
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeAt(position);
+            }
+        });
     }
 
     @Override
@@ -73,13 +66,13 @@ public class RatioCardRecyclerAdapter extends
 
     public void removeAt(int position) {
         MainActivity.removeRatio(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, ratioList.size());
+        notifyDataSetChanged();
     }
 
     protected class RatioCardHolder extends RecyclerView.ViewHolder {
 
         EditText topLeft, topRight, bottomLeft, bottomRight;
+        Button delete;
 
         public RatioCardHolder(View itemView) {
             super(itemView);
@@ -87,7 +80,7 @@ public class RatioCardRecyclerAdapter extends
             topRight = (EditText) itemView.findViewById(R.id.numberTopRight);
             bottomLeft = (EditText) itemView.findViewById(R.id.numberBottomLeft);
             bottomRight = (EditText) itemView.findViewById(R.id.numberBottomRight);
-
+            delete = (Button) itemView.findViewById(R.id.delete_button);
 
             // when changing the value of A, update the value of C
             topLeft.addTextChangedListener(new TextWatcher() {

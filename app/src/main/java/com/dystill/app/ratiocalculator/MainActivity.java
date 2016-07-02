@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         RATIO_LIST = new ArrayList<>();
 
         // initialization for testing purposes
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 1; i++) {
 
             RATIO_LIST.add(new double[4]);
 
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_add:                                                                   // add folder action button
-                addRatio();
-                mainRatioListAdapter.notifyDataSetChanged();
+                addRatio(0);
+                mainRatioListAdapter.notifyItemInserted(0);
                 return true;
 
             default:                                                                                // the user's action was not recognized.
@@ -73,12 +73,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    protected static void removeRatio(int folder) {
-        RATIO_LIST.remove(folder);
+    protected static void removeRatio(int position) {
+        Log.v("removeRatio", "Removing " + position);
+        RATIO_LIST.remove(position);
     }
 
     protected static void addRatio() {
         double newRatioSet[] = {0.0,0.0,0.0,0.0};
+        Log.v("addRatio", "Adding to end");
         RATIO_LIST.add(newRatioSet);
+    }
+
+    protected static void addRatio(int position) {
+        double newRatioSet[] = {0.0,0.0,0.0,0.0};
+        Log.v("addRatio", "Adding to " + position);
+        RATIO_LIST.add(position, newRatioSet);
     }
 }
