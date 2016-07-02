@@ -5,4 +5,6 @@
     <string name="action_add">Add New Ratio</string>
     <string name="action_settings">Settings</string>
     <string name="ratio_equal_sign">=</string>
+    <string name="background_new_card">Tap to add a new ratio card</string>
+    <string name="background_image_content_description">Image showing a standard ratio equation with variables a, b, c, and d. Tap to add a new ratio card.</string>
 </resources>

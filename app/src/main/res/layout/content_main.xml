@@ -20,4 +20,31 @@
         android:clipToPadding="false"
         />
 
+    <LinearLayout
+        android:id="@+id/backgroundLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/backgroundImageRatio"
+            android:contentDescription="@string/background_image_content_description"
+            android:layout_width="@dimen/background_image_size"
+            android:layout_height="@dimen/background_image_size"
+            android:src="@drawable/abcd_ratio_gray"/>
+
+        <TextView
+            android:id="@+id/backgroundTextViewTapToAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/background_new_card"
+            android:fontFamily="sans-serif-condensed"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
+            android:textColor="@color/colorBackgroundImage"/>
+
+    </LinearLayout>
+
 </RelativeLayout>

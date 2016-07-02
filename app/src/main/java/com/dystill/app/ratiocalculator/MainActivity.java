@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static List<double[]> RATIO_LIST;
-    private RecyclerView mainRatioList;
+    private static LinearLayout background;
     private RatioCardRecyclerAdapter mainRatioListAdapter;
 
     @Override
@@ -27,24 +29,22 @@ public class MainActivity extends AppCompatActivity {
         Log.v("onCreate", "Started");
 
         // obtain important views
-        mainRatioList = (RecyclerView) findViewById(R.id.cardList);
+        background = (LinearLayout) findViewById(R.id.backgroundLayout);
+        RecyclerView mainRatioList = (RecyclerView) findViewById(R.id.cardList);
 
         RATIO_LIST = new ArrayList<>();
-
-        // initialization for testing purposes
-        for(int i = 0; i < 1; i++) {
-
-            RATIO_LIST.add(new double[4]);
-
-            for (int j = 0; j < RATIO_LIST.get(0).length; j++) {
-                RATIO_LIST.get(i)[j] = 0;
-            }
-        }
 
         // add cards to the recyclerView
         mainRatioListAdapter = new RatioCardRecyclerAdapter(this, RATIO_LIST);
         mainRatioList.setAdapter(mainRatioListAdapter);
         mainRatioList.setLayoutManager(new LinearLayoutManager(this));
+
+        background.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addRatio();
+            }
+        });
     }
 
     @Override
@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_add:                                                                   // add folder action button
                 addRatio(0);
-                mainRatioListAdapter.notifyItemInserted(0);
                 return true;
 
             default:                                                                                // the user's action was not recognized.
@@ -70,20 +69,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    protected static void removeRatio(int position) {
+    static void removeRatio(int position) {
         Log.v("removeRatio", "Removing " + position);
         RATIO_LIST.remove(position);
+        checkRatioImageVisibilityStatus();
     }
 
-    protected static void addRatio() {
+    private void addRatio() {
         double newRatioSet[] = {0.0,0.0,0.0,0.0};
         Log.v("addRatio", "Adding to end");
         RATIO_LIST.add(newRatioSet);
+        mainRatioListAdapter.notifyItemInserted(0);
+        checkRatioImageVisibilityStatus();
     }
 
-    private static void addRatio(int position) {
+    private void addRatio(int position) {
         double newRatioSet[] = {0.0,0.0,0.0,0.0};
         Log.v("addRatio", "Adding to " + position);
         RATIO_LIST.add(position, newRatioSet);
+        mainRatioListAdapter.notifyItemInserted(0);
+        checkRatioImageVisibilityStatus();
     }
+
+    private static void checkRatioImageVisibilityStatus() {
+        if(!background.isShown() && RATIO_LIST.isEmpty())
+            background.setVisibility(View.VISIBLE);
+        else
+            background.setVisibility(View.GONE);
+    }
+
 }

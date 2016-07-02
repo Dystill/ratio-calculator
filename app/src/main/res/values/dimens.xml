@@ -21,4 +21,5 @@
     <dimen name="card_buttonarea_horizontal_margin">8dp</dimen>
     <dimen name="card_button_horizontal_margin">8dp</dimen>
 
+    <dimen name="background_image_size">296dp</dimen>
 </resources>
