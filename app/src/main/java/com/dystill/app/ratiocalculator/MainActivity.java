@@ -5,21 +5,18 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    protected static List<double[]> RATIO_LIST;
-    RecyclerView mainRatioList;
-    RatioCardRecyclerAdapter mainRatioListAdapter;
+    private static List<double[]> RATIO_LIST;
+    private RecyclerView mainRatioList;
+    private RatioCardRecyclerAdapter mainRatioListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // add cards to the recyclerview
+        // add cards to the recyclerView
         mainRatioListAdapter = new RatioCardRecyclerAdapter(this, RATIO_LIST);
         mainRatioList.setAdapter(mainRatioListAdapter);
         mainRatioList.setLayoutManager(new LinearLayoutManager(this));
@@ -84,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         RATIO_LIST.add(newRatioSet);
     }
 
-    protected static void addRatio(int position) {
+    private static void addRatio(int position) {
         double newRatioSet[] = {0.0,0.0,0.0,0.0};
         Log.v("addRatio", "Adding to " + position);
         RATIO_LIST.add(position, newRatioSet);

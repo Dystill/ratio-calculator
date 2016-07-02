@@ -16,9 +16,8 @@ import java.util.List;
 public class RatioCardRecyclerAdapter extends
         RecyclerView.Adapter<RatioCardRecyclerAdapter.RatioCardHolder> {
 
-    private LayoutInflater inflater;
-    private List<double[]> ratioList;
-    private char changeFlag = ' ';
+    private final LayoutInflater inflater;
+    private final List<double[]> ratioList;
 
     public RatioCardRecyclerAdapter(Context context, List<double[]> rList) {
         this.inflater = LayoutInflater.from(context);
@@ -33,7 +32,7 @@ public class RatioCardRecyclerAdapter extends
     }
 
     @Override
-    public void onBindViewHolder(RatioCardHolder holder, final int position) {
+    public void onBindViewHolder(final RatioCardHolder holder, int position) {
         Log.v("onBindViewHolder", "Started");
 
         Log.v("onBindViewHolder", "Create Text");
@@ -54,7 +53,7 @@ public class RatioCardRecyclerAdapter extends
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                removeAt(position);
+                removeAt(holder.getAdapterPosition());
             }
         });
     }
@@ -64,7 +63,7 @@ public class RatioCardRecyclerAdapter extends
         return ratioList.size();
     }
 
-    public void removeAt(int position) {
+    private void removeAt(int position) {
         MainActivity.removeRatio(position);
         notifyDataSetChanged();
     }
@@ -100,7 +99,6 @@ public class RatioCardRecyclerAdapter extends
                     Log.v("afterTextChanged", "C = " + ratioList.get(position)[2]);
                     String textC = "" + ratioList.get(position)[2];
                     if(topLeft.hasFocus()) {
-                        changeFlag = 'C';
                         topRight.setText(textC);
                     }
                 }
@@ -123,7 +121,6 @@ public class RatioCardRecyclerAdapter extends
                             ratioList.get(position)[1], ratioList.get(position)[2]);
                     String textD = "" + ratioList.get(position)[3];
                     if(bottomLeft.hasFocus()) {
-                        changeFlag = 'D';
                         bottomRight.setText(textD);
                     }
                 }
@@ -146,7 +143,6 @@ public class RatioCardRecyclerAdapter extends
                             ratioList.get(position)[1], ratioList.get(position)[2]);
                     String textD = "" + ratioList.get(position)[3];
                     if(topRight.hasFocus()) {
-                        changeFlag = 'D';
                         bottomRight.setText(textD);
                     }
                 }
@@ -169,7 +165,6 @@ public class RatioCardRecyclerAdapter extends
                             ratioList.get(position)[1], ratioList.get(position)[3]);
                     String textD = "" + ratioList.get(position)[2];
                     if(bottomRight.hasFocus()) {
-                        changeFlag = 'D';
                         topRight.setText(textD);
                     }
                 }
