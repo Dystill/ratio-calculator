@@ -131,7 +131,7 @@ public class RatioCardRecyclerAdapter extends
                     try {
                         ratioList.get(position)[1] = Double.parseDouble(editable.toString());
                     } catch(Exception e) {
-                        ratioList.get(position)[0] = 0.0;
+                        ratioList.get(position)[1] = 0.0;
                     }
 
                     if(ratioList.get(position)[0] != 0)
@@ -163,7 +163,7 @@ public class RatioCardRecyclerAdapter extends
                     try {
                         ratioList.get(position)[2] = Double.parseDouble(editable.toString());
                     } catch(Exception e) {
-                        ratioList.get(position)[0] = 0.0;
+                        ratioList.get(position)[2] = 0.0;
                     }
 
                     if(ratioList.get(position)[0] != 0)
@@ -194,17 +194,18 @@ public class RatioCardRecyclerAdapter extends
                     try {
                         ratioList.get(position)[3] = Double.parseDouble(editable.toString());
                     } catch(Exception e) {
-                        ratioList.get(position)[0] = 0.0;
+                        ratioList.get(position)[3] = 0.0;
                     }
 
                     if(ratioList.get(position)[1] != 0)
                         ratioList.get(position)[2] = solveRatioForTop(ratioList.get(position)[0],
                             ratioList.get(position)[1], ratioList.get(position)[3]);
+
                     Log.v("afterTextChanged", "D = " + ratioList.get(position)[3]);
                     Log.v("afterTextChanged", "C = " + ratioList.get(position)[2]);
                     if(bottomRight.hasFocus()) {
                         Log.v("afterTextChanged", "has focus");
-                        bottomRight.setText(decimalFormat.format(ratioList.get(position)[2]));
+                        topRight.setText(decimalFormat.format(ratioList.get(position)[2]));
                     }
                 }
             });
